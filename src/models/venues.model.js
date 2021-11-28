@@ -31,7 +31,7 @@ venueSchema.plugin(toJSON);
 venueSchema.plugin(paginate);
 
 venueSchema.statics.isVenueExist = async function (venueId) {
-  const venue = await this.findOne({ _id: { $ne: venueId } });
+  const venue = await this.findOne({ _id: venueId });
   return !!venue;
 };
 
@@ -41,6 +41,7 @@ venueSchema.pre('save', async function (next) {
 //   if (user.isModified('password')) {
 //     user.password = await bcrypt.hash(user.password, 8);
 //   }
+  Venue
   next();
 });
 

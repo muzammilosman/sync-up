@@ -3,7 +3,30 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
 const { roles } = require('../config/roles');
-const { userSchema } = require('./user.model')
+const { userSchema } = require('./user.model');
+
+const paymentSchema = mongoose.Schema({
+  booking_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Booking',
+      required: true
+  },
+  user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+  },
+  payment_method: {
+      type: String,
+      required: true
+  },
+  amount: {
+      type: Number,
+      required: true
+  }
+}, {
+  timestamps: true
+});
 
 const bookingSchema = mongoose.Schema(
   {
@@ -22,13 +45,19 @@ const bookingSchema = mongoose.Schema(
         ref: 'User',
         required: true
     },
-    attendees: [userSchema],
+    attendees: [{
+      user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      name: String
+    }],
     split_booking: {
         type: Boolean,
         required: true,
         default: true
     },
-    booking_status: {
+    event_status: {
         type: Number,
         enum: [1,2,3],
         default: 1
@@ -45,38 +74,14 @@ const bookingSchema = mongoose.Schema(
   }
 );
 
-
-const paymentSchema = mongoose.Schema({
-    booking_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Booking',
-        required: true
-    },
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    payment_method: {
-        type: String,
-        required: true
-    },
-    amount: {
-        type: Number,
-        required: true
-    }
-}, {
-    timestamps: true
-});
-
 // add plugin that converts mongoose to json
 bookingSchema.plugin(toJSON);
 bookingSchema.plugin(paginate);
 
-bookingSchema.statics.isVenueExist = async function (venueId) {
-  const venue = await this.findOne({ _id: { $ne: venueId } });
-  return !!venue;
-};
+// bookingSchema.statics.isVenueExist = async function (venueId) {
+//   const venue = await this.findOne({ _id: { $ne: venueId } });
+//   return !!venue;
+// };
 
 bookingSchema.pre('save', async function (next) {
   const booking = this;
@@ -84,7 +89,7 @@ bookingSchema.pre('save', async function (next) {
   next();
 });
 
-const Booking = mongoose.model('Venue', bookingSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
 const Payment = mongoose.model('Payment', paymentSchema);
 
 module.exports = Booking;
