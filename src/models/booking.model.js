@@ -67,6 +67,10 @@ const bookingSchema = mongoose.Schema(
         enum: [1, 2, 3],
         default: 1
     },
+    payment_received: {
+      type: Number,
+      default: 0
+    },
     payments: [paymentSchema]
   },
   {
