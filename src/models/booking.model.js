@@ -71,6 +71,10 @@ const bookingSchema = mongoose.Schema(
       type: Number,
       default: 0
     },
+    paymentRequestsSent: {
+      type: Boolean,
+      default: false
+    },
     payments: [paymentSchema]
   },
   {
@@ -96,4 +100,4 @@ bookingSchema.pre('save', async function (next) {
 const Booking = mongoose.model('Booking', bookingSchema);
 const Payment = mongoose.model('Payment', paymentSchema);
 
-module.exports = Booking;
+module.exports = {Booking, Payment};

@@ -1,51 +1,19 @@
-# RESTful API Node Server Boilerplate
+# A NodeJS based module to implement group booking and integrate payment splitting
 
-[![Build Status](https://travis-ci.org/hagopj13/node-express-boilerplate.svg?branch=master)](https://travis-ci.org/hagopj13/node-express-boilerplate)
-[![Coverage Status](https://coveralls.io/repos/github/hagopj13/node-express-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/hagopj13/node-express-boilerplate?branch=master)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-
-A boilerplate/starter project for quickly building RESTful APIs using Node.js, Express, and Mongoose.
-
-By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc. For more details, check the features list below.
-
+The application is built on top of [node boilerplate](https://github.com/hagopj13/node-express-boilerplate.git) which has CI-CD integrated with Travis CI. This has been meant to be a module which can be integrated with projects
+which have the motive to bring in split booking or split payment feature.
 ## Quick Start
 
-To create a project, simply run:
+To run the project, simply run:
 
 ```bash
-npx create-nodejs-express-app <project-name>
+npm i
 ```
 
-Or
+and
 
 ```bash
-npm init nodejs-express-app <project-name>
-```
-
-## Manual Installation
-
-If you would still prefer to do the installation manually, follow these steps:
-
-Clone the repo:
-
-```bash
-git clone --depth 1 https://github.com/hagopj13/node-express-boilerplate.git
-cd node-express-boilerplate
-npx rimraf ./.git
-```
-
-Install the dependencies:
-
-```bash
-yarn install
-```
-
-Set the environment variables:
-
-```bash
-cp .env.example .env
-
-# open .env and modify the environment variables (if needed)
+npm run dev
 ```
 
 ## Table of Contents

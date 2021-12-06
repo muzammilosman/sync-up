@@ -14,7 +14,24 @@ const getBookings = () => {
     return Booking.find();
 }
 
+const initiatePayment = (bookingId) => {
+    // return Booking.updateOne({
+    //     _id: bookingId
+    // }, {
+    //     $set: {
+    //         paymentRequestsSent: true
+    //     }
+    // });
+
+    return Booking.findByIdAndUpdate(bookingId, {
+        $set: {
+            paymentRequestsSent: true
+        }
+    }, { lean: true});
+}
+
 module.exports = {
     createBooking,
-    getBookings
+    getBookings,
+    initiatePayment
 }

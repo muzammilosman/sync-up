@@ -38,10 +38,6 @@ venueSchema.statics.isVenueExist = async function (venueId) {
 venueSchema.pre('save', async function (next) {
   const venue = this;
   console.log("Pre save:",venue);
-//   if (user.isModified('password')) {
-//     user.password = await bcrypt.hash(user.password, 8);
-//   }
-  Venue
   next();
 });
 

@@ -10,4 +10,8 @@ router.route('/')
     .post(auth('manageBookings'), bookingController.createBooking)
     .get(auth('getBookings'), bookingController.getBookings);
 
+router.route('/payment-req/:id')
+    .post(auth('getBookings'), bookingController.sendPaymentReq)
+    .get(auth('getBookings'), bookingController.getPaymentRequests);
+
 module.exports = router;
