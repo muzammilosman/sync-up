@@ -11,7 +11,10 @@ router.route('/')
     .get(auth('getBookings'), bookingController.getBookings);
 
 router.route('/payment-req/:id')
-    .post(auth('getBookings'), bookingController.sendPaymentReq)
+    .post(auth('manageBookings'), bookingController.sendPaymentReq)
     .get(auth('getBookings'), bookingController.getPaymentRequests);
+
+router.route('/pay/:id')
+    .post(auth('manageBookings'), bookingController.updatePaymentStatus)
 
 module.exports = router;

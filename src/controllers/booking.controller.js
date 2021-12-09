@@ -25,13 +25,25 @@ const sendPaymentReq = catchAsync(async (req, res) => {
 });
 
 const getPaymentRequests = catchAsync(async (req, res) => {
+    if(!req.params.id){
+        throw new ApiError(httpStatus.NOT_FOUND, 'Invalid Booking ID')
+    }
     const result = await paymentReqService.getPayRequests(req.params.id);
     res.send(result);
 });
+
+const updatePaymentStatus = catchAsync(async (req, res) => {
+    if(!req.params.id){
+        throw new ApiError(httpStatus.NOT_FOUND, 'Invalid Booking ID')
+    }
+    const result = await paymentReqService.updatePaymentStatus(req.params.id);
+    res.send(result)
+})
 
 module.exports = {
     createBooking,
     getBookings,
     sendPaymentReq,
-    getPaymentRequests
+    getPaymentRequests,
+    updatePaymentStatus
 }

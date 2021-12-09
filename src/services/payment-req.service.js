@@ -21,7 +21,17 @@ const getPayRequests = async (bookingId) => {
     return paymentRequests
 }
 
+const updatePaymentStatus = async (payment_request_id) => {
+    const paymentStatusUpdate = await PaymentRequest.findByIdAndUpdate(payment_request_id, {
+        $set: {
+            status: 1
+        }
+    })
+    return paymentStatusUpdate;
+}
+
 module.exports = {
     generatePaymentRequests,
-    getPayRequests
+    getPayRequests,
+    updatePaymentStatus
 }
